@@ -1,0 +1,37 @@
+app:
+  updateInterval:
+    _default: "60s"
+  discord:
+    hook_url:
+      _default: "https://discord.com/api/webhooks/xxxxxxxxxxxxxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  db:
+    host:
+      _default: "localhost"
+      dev: "db.example.com"
+      test: "db.example.com"
+      prod: "db.example.com"
+    port:
+      _default: "5555"
+      dev: "5555"
+      test: "5555"
+      prod: "5555"
+    user:
+      _default: "postgres"
+      dev: "dev"
+      test: "test"
+      prod: "prod"
+    name:
+      _default: "dev"
+      dev: "dev"
+      test: "test"
+      prod: "prod"
+    pass:
+      _default: "postgres"
+      dev: "password"
+      test: "password"
+      prod: "password"
+  aws:
+    accessKeyId:
+      _default: "xxxxxxxxxxxxxxxxxxxx"
+    accessSecretKey:
+      _default: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

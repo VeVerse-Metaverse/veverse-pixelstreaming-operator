@@ -1,0 +1,53 @@
+variables:
+  WERF_VERSION: 1.2 stable
+
+stages:
+  - deploy
+
+# Base deployment
+.deploy:
+  stage: deploy
+  script:
+    - source ~/.bashrc
+    - echo $PATH
+    - type multiwerf && source $(multiwerf use ${WERF_VERSION} --as-file)
+    - type werf && source $(werf ci-env gitlab --as-file)
+    - werf converge
+      --namespace ${CI_NAMESPACE}
+      --set "global.ci_url=$(cut -d / -f 3 <<< $CI_ENVIRONMENT_URL)"
+  tags:
+    - werf
+
+Deploy to Dev:
+  extends: .deploy
+  environment:
+    name: dev
+  variables:
+    CI_NAMESPACE: veverse-pixelstreaming-dev
+  only:
+    - branches
+  when: always
+  tags:
+    - aws
+Deploy to Test:
+  extends: .deploy
+  environment:
+    name: test
+  variables:
+    CI_NAMESPACE: veverse-pixelstreaming-test
+  only:
+    - branches
+  when: manual
+  tags:
+    - aws
+Deploy to Production:
+  extends: .deploy
+  environment:
+    name: prod
+  variables:
+    CI_NAMESPACE: veverse-pixelstreaming-prod
+  only:
+    - tags
+  when: manual
+  tags:
+    - aws

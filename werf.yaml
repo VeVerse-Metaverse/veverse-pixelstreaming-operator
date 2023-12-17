@@ -1,0 +1,6 @@
+project: veverse-pixelstreaming-operator
+configVersion: 1
+
+---
+image: operator
+dockerfile: Dockerfile
